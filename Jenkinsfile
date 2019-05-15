@@ -52,23 +52,5 @@ volumes: [
             sh "helm upgrade --install --wait ${releaseName} ${chart_dir} --set ${overrides} --namespace='dev'"
         }
     }
-    /* stage('Deploy') {
-        container('kubectl') {
-          withCredentials([string(credentialsId: '16469a0d-1ac3-4404-9f66-f81893abe4cf', variable: 'K8S_TOKEN')]) {
-            withEnv([
-                // Ensure that kubectl is using our special robot deployer’s kubeconfig
-                "KUBECONFIG=/home/[jenkins_user]/.kube/kubernetes_deployment_config",
-                "KUBECTL=kubectl --token $K8S_TOKEN",
-            ]) {
-                // Execute the code that is now wrapped with the correct kubectl
-                sh("sed -i.bak 's#arulkumar1967/rev_helloworld_gke_sb#${imageTag}#' ./k8s/app/*.yaml")
-                sh("$KUBECTL --namespace=dev apply -f k8s/app")
-                sh("echo http://`KUBECTL get service -o jsonpath='{.status.loadBalancer.ingress[0].ip}'`")
-            }
-         }
-
-        }
-    }
-    */
   }
 }
